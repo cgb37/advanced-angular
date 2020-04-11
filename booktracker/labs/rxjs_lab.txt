@@ -1,4 +1,5 @@
 RxJS Lab
+--------
 
 	1. Add a new file to the "core" folder that will contain custom operators (if you don't have one already).
 	2. Export a new operator named "logEagerReaders" that will take a weekly reading goal (in minutes) as a parameter and log the name of readers with a goal greater than that value.

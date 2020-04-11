@@ -1,4 +1,5 @@
 NgRx Lab
+--------
 
   Update the app so that the Reader of the Month is now being stored in an NgRx store rather than a service.
 

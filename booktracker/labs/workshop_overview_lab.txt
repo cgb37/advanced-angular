@@ -1,0 +1,15 @@
+Workshop Overview Lab
+---------------------
+
+The are git tags on the "master" branch of the repo that will reset your code to various points in the workshop.
+
+Any time you checkout a tag and want to begin adding your own code from that point, you should first create a new branch since checking out a tag puts your repo in "detached HEAD" state and any commits you make won't be associated with a branch.
+
+Run the follow commands to set your code files to the workshop starting point and create the branch you'll use for your own code:
+
+  1. Checkout the tag named "workshop_start" that contains the version of the files we'll start with.
+       git checkout workshop_start
+  2. Create a new branch to contain the code you'll write. Name the branch whatever you like. The following command creates a branch named "my_workshop_code".
+       git checkout -b my_workshop_code
+
+If at any point you need to checkout another tag and begin adding your own code from that point, follow these steps again but substitute the tag you need and a different branch name.
