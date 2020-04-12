@@ -9,6 +9,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BooksModule } from './books/books.module';
 import { ReadersModule } from './readers/readers.module';
 import { SharedModule } from './shared/shared.module';
+import { BookLibraryModule } from 'book-library';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     BooksModule,
     ReadersModule,
-    SharedModule
+    SharedModule,
+    BookLibraryModule
   ],
   bootstrap: [AppComponent]
 })

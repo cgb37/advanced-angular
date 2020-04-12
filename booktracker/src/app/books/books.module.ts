@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { BooksRoutingModule } from './books-routing.module';
 import { AddBookComponent } from './add-book/add-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
+import { BookLibraryModule } from 'book-library';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { EditBookComponent } from './edit-book/edit-book.component';
   imports: [
     CommonModule,
     FormsModule,
-    BooksRoutingModule
+    BooksRoutingModule,
+    BookLibraryModule
   ]
 })
 export class BooksModule { }
