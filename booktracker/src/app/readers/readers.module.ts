@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReadersRoutingModule } from './readers-routing.module';
 import { AddReaderComponent } from './add-reader/add-reader.component';
 import { EditReaderComponent } from './edit-reader/edit-reader.component';
-
+import { ReaderLibraryModule } from 'reader-library';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { EditReaderComponent } from './edit-reader/edit-reader.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReadersRoutingModule
+    ReadersRoutingModule,
+    ReaderLibraryModule
   ]
 })
 export class ReadersModule { }
