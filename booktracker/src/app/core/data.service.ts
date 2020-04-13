@@ -32,9 +32,9 @@ export class DataService {
     return allReaders.find(reader => reader.readerID === id);
   }
 
-  getAllBooks(): Book[] {
+  getAllBooks(): Observable<Book[]> {
     // URL to get all books is /api/books
-    return allBooks;
+    return this.http.get<Book[]>('/api/books');
   }
 
   private handleHttpError(error: HttpErrorResponse): Observable<BookTrackerError> {
