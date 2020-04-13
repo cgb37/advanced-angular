@@ -7,7 +7,7 @@ import { Reader } from "src/app/models/reader";
 import { DataService } from 'src/app/core/data.service';
 import { BookTrackerError } from 'src/app/models/bookTrackerError';
 import { Subscription } from 'rxjs';
-import { logNewerBooks } from '../core/book_tracker_operators';
+import { logNewerBooks, logEagerReaders } from '../core/book_tracker_operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   allReaders: Reader[];
   mostPopularBook: Book;
   bookSubscription: Subscription;
+  readerSubscription: Subscription;
 
   constructor(private dataService: DataService,
               private title: Title) { }
@@ -36,7 +37,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
         books => this.allBooks = books
       );
 
-    this.allReaders = this.dataService.getAllReaders();
+    //this.allReaders = this.dataService.getAllReaders();
+
+    this.readerSubscription = this.dataService.getAllReaders()
+      .pipe(
+        logEagerReaders(200)
+      )
+      .subscribe(
+        readers => this.allReaders = readers
+      );
+
     this.mostPopularBook = this.dataService.mostPopularBook;
 
     this.title.setTitle(`Book Tracker`);
@@ -44,6 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.bookSubscription.unsubscribe();
+    this.readerSubscription.unsubscribe();
   }
 
   deleteBook(bookID: number): void {
