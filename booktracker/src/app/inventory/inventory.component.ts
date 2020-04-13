@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-inventory',
@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryComponent implements OnInit {
 
-  branchName: string = '<branch name>';
+  @Input() branchName: string = '<branch name>';
+  @Output() increased = new EventEmitter<number>();
 
   constructor() { }
 
@@ -15,7 +16,7 @@ export class InventoryComponent implements OnInit {
   }
 
   increaseInventory(amount: string) {
-    
+    this.increased.emit(parseInt(amount));
   }
 
 }

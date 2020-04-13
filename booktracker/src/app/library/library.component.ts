@@ -28,4 +28,8 @@ export class LibraryComponent implements OnInit, OnDestroy {
     this.bookSubscription.unsubscribe();
   }
 
+  onIncrease(amount: number) {
+    this.totalBookCount += amount;
+  }
+
 }
