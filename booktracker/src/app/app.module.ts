@@ -12,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
 import { BookLibraryModule } from 'book-library';
 import { LibraryComponent } from './library/library.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { ActivityLogComponent } from './activity-log/activity-log.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { InventoryComponent } from './inventory/inventory.component';
     AppComponent,
     DashboardComponent,
     LibraryComponent,
-    InventoryComponent
+    InventoryComponent,
+    ActivityLogComponent
   ],
   imports: [
     BrowserModule,
