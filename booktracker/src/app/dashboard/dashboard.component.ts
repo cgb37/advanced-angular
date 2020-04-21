@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Store, select } from '@ngrx/store';
 
 import { Book } from "src/app/models/book";
 import { Reader } from "src/app/models/reader";
@@ -9,6 +10,8 @@ import { BookTrackerError } from 'src/app/models/bookTrackerError';
 import { Subscription } from 'rxjs';
 import { logNewerBooks, logEagerReaders } from '../core/book_tracker_operators';
 import { ActivityLogService } from '../core/activity-log.service';
+import { BooksState } from '../books/books.reducer';
+import { getFavoriteBook } from '../books/books.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,10 +26,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
   bookSubscription: Subscription;
   readerSubscription: Subscription;
   readerOfTheMonth: Reader;
+  favoriteBookSubscription: Subscription;
 
   constructor(private dataService: DataService,
               private title: Title,
-              private activityService: ActivityLogService) { }
+              private activityService: ActivityLogService,
+              private store: Store<BooksState>) { }
   
   ngOnInit() {
 
@@ -50,7 +55,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
         readers => this.allReaders = readers
       );
 
-    this.mostPopularBook = this.dataService.mostPopularBook;
+    //this.mostPopularBook = this.dataService.mostPopularBook;
+
+    this.favoriteBookSubscription = this.store.pipe(
+      select(getFavoriteBook)
+    )
+    .subscribe(
+      book => this.mostPopularBook = book
+    );
+
     this.readerOfTheMonth = this.dataService.readerOfTheMonth;
 
     this.title.setTitle(`Book Tracker`);
@@ -59,6 +72,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.bookSubscription.unsubscribe();
     this.readerSubscription.unsubscribe();
+    this.favoriteBookSubscription.unsubscribe();
   }
 
   deleteBook(bookID: number): void {
