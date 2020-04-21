@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -17,6 +17,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { ActivityLogComponent } from './activity-log/activity-log.component';
 import { LoggerService } from './core/logger.service';
 import { PlainLoggerService } from './core/plain-logger.service';
+import { AddHeaderInterceptor } from './core/add-header.interceptor';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { PlainLoggerService } from './core/plain-logger.service';
     })
   ],
   providers: [
-    { provide: LoggerService, useClass: PlainLoggerService }
+    { provide: LoggerService, useClass: PlainLoggerService },
+    { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
