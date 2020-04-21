@@ -18,6 +18,7 @@ import { ActivityLogComponent } from './activity-log/activity-log.component';
 import { LoggerService } from './core/logger.service';
 import { PlainLoggerService } from './core/plain-logger.service';
 import { AddHeaderInterceptor } from './core/add-header.interceptor';
+import { LogUrlInterceptor } from './core/log-url.interceptor';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { AddHeaderInterceptor } from './core/add-header.interceptor';
   ],
   providers: [
     { provide: LoggerService, useClass: PlainLoggerService },
-    { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LogUrlInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
