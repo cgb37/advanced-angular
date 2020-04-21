@@ -14,6 +14,7 @@ import { BooksState } from '../books/books.reducer';
 import { getFavoriteBook } from '../books/books.selectors';
 import { ReadersState } from '../readers/readers.reducer';
 import { getReaderOfTheMonth } from '../readers/readers.selectors';
+import { LoggerService } from '../core/logger.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,9 +36,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
               private title: Title,
               private activityService: ActivityLogService,
               private store: Store<BooksState>,
-              private readersStore: Store<ReadersState>) { }
+              private readersStore: Store<ReadersState>,
+              private logger: LoggerService) { }
   
   ngOnInit() {
+
+    this.logger.log('Initializing the dashboard.');
 
     //this.allBooks = this.dataService.getAllBooks();
 

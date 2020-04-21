@@ -15,6 +15,8 @@ import { BookLibraryModule } from 'book-library';
 import { LibraryComponent } from './library/library.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { ActivityLogComponent } from './activity-log/activity-log.component';
+import { LoggerService } from './core/logger.service';
+import { PlainLoggerService } from './core/plain-logger.service';
 
 
 @NgModule({
@@ -38,6 +40,9 @@ import { ActivityLogComponent } from './activity-log/activity-log.component';
     StoreDevtoolsModule.instrument({
       name: 'BookTracker'
     })
+  ],
+  providers: [
+    { provide: LoggerService, useClass: PlainLoggerService }
   ],
   bootstrap: [AppComponent]
 })
