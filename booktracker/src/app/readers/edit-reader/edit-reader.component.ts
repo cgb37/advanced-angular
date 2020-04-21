@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { ReadersState } from '../readers.reducer';
+import * as ReaderActions from '../readers.actions';
 
 import { Reader } from "src/app/models/reader";
 import { DataService } from 'src/app/core/data.service';
@@ -18,7 +21,8 @@ export class EditReaderComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private dataService: DataService,
-              private badgeService: BadgeService) { }
+              private badgeService: BadgeService,
+              private store: Store<ReadersState>) { }
 
   ngOnInit() {
     let readerID: number = parseInt(this.route.snapshot.params['id']);
@@ -31,6 +35,7 @@ export class EditReaderComponent implements OnInit {
   }
 
   setReaderOfTheMonth() {
-    this.dataService.setReaderOfTheMonth(this.selectedReader);
+    //this.dataService.setReaderOfTheMonth(this.selectedReader);
+    this.store.dispatch(ReaderActions.updateReaderOfTheMonth({ readerOfTheMonth: this.selectedReader }));
   }
 }

@@ -12,6 +12,8 @@ import { logNewerBooks, logEagerReaders } from '../core/book_tracker_operators';
 import { ActivityLogService } from '../core/activity-log.service';
 import { BooksState } from '../books/books.reducer';
 import { getFavoriteBook } from '../books/books.selectors';
+import { ReadersState } from '../readers/readers.reducer';
+import { getReaderOfTheMonth } from '../readers/readers.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,11 +29,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   readerSubscription: Subscription;
   readerOfTheMonth: Reader;
   favoriteBookSubscription: Subscription;
+  readerOfTheMonthSubscription: Subscription;
 
   constructor(private dataService: DataService,
               private title: Title,
               private activityService: ActivityLogService,
-              private store: Store<BooksState>) { }
+              private store: Store<BooksState>,
+              private readersStore: Store<ReadersState>) { }
   
   ngOnInit() {
 
@@ -64,7 +68,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
       book => this.mostPopularBook = book
     );
 
-    this.readerOfTheMonth = this.dataService.readerOfTheMonth;
+    //this.readerOfTheMonth = this.dataService.readerOfTheMonth;
+
+    this.readerOfTheMonthSubscription = this.store.pipe(
+	    select(getReaderOfTheMonth)
+    )
+    .subscribe(
+        (reader: Reader) => this.readerOfTheMonth = reader
+    );
+
 
     this.title.setTitle(`Book Tracker`);
   }
@@ -73,6 +85,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.bookSubscription.unsubscribe();
     this.readerSubscription.unsubscribe();
     this.favoriteBookSubscription.unsubscribe();
+    this.readerOfTheMonthSubscription.unsubscribe();
   }
 
   deleteBook(bookID: number): void {
