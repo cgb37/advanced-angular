@@ -63,23 +63,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
         readers => this.allReaders = readers
       );
 
-    //this.mostPopularBook = this.dataService.mostPopularBook;
+    this.mostPopularBook = this.dataService.mostPopularBook;
 
-    this.favoriteBookSubscription = this.store.pipe(
-      select(getFavoriteBook)
-    )
-    .subscribe(
-      book => this.mostPopularBook = book
-    );
+    // this.favoriteBookSubscription = this.store.pipe(
+    //   select(getFavoriteBook)
+    // )
+    // .subscribe(
+    //   book => this.mostPopularBook = book
+    // );
 
-    //this.readerOfTheMonth = this.dataService.readerOfTheMonth;
+    this.readerOfTheMonth = this.dataService.readerOfTheMonth;
 
-    this.readerOfTheMonthSubscription = this.store.pipe(
-	    select(getReaderOfTheMonth)
-    )
-    .subscribe(
-        (reader: Reader) => this.readerOfTheMonth = reader
-    );
+    // this.readerOfTheMonthSubscription = this.store.pipe(
+	  //   select(getReaderOfTheMonth)
+    // )
+    // .subscribe(
+    //     (reader: Reader) => this.readerOfTheMonth = reader
+    // );
 
 
     this.title.setTitle(`Book Tracker`);
@@ -88,8 +88,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.bookSubscription.unsubscribe();
     this.readerSubscription.unsubscribe();
-    this.favoriteBookSubscription.unsubscribe();
-    this.readerOfTheMonthSubscription.unsubscribe();
+    // this.favoriteBookSubscription.unsubscribe();
+    // this.readerOfTheMonthSubscription.unsubscribe();
   }
 
   deleteBook(bookID: number): void {
