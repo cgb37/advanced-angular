@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'library', component: LibraryComponent },
   { path: 'books', loadChildren: () => import('./books/books.module').then(m => m.BooksModule)},
+  { path: 'readers', loadChildren: () => import('./readers/readers.module').then(m => m.ReadersModule)},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 

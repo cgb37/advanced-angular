@@ -8,7 +8,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ReadersModule } from './readers/readers.module';
 import { SharedModule } from './shared/shared.module';
 import { BookLibraryModule } from 'book-library';
 import { LibraryComponent } from './library/library.component';
@@ -33,7 +32,6 @@ import { LogUrlInterceptor } from './core/log-url.interceptor';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReadersModule,
     SharedModule,
     BookLibraryModule,
     StoreModule.forRoot({}),
