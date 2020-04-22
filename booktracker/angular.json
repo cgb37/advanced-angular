@@ -116,6 +116,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "booktracker"
+    }
+  },
+  "defaultProject": "booktracker",
+  "cli": {
+    "analytics": false
+  }
 }
